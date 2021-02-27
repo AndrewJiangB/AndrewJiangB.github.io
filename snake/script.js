@@ -201,42 +201,29 @@ class Player extends Tail{
     return game.is_snake(this.x, this.y);
   }
 
-  checkValid(direction){
-    if (this.tail == null){
-      return true;
-    }
-    let new_x = this.x + direction[0];
-    let new_y = this.y + direction[0];
-    if (new_x == this.tail.x && new_y == this.tail.y){
-      console.log(new_x == this.tail.x && new_y == this.tail.y);
-      return false; 
-    }
-    return true;
-  }
-
   left(){
-    if (this.checkValid([-1,0])){
+    if (!(this.direction_code=='right')){
       this.directions = [-1,0];
       this.direction_code='left';
     }
   }
 
   right(){
-    if (this.checkValid([1,0])){
+    if (!(this.direction_code=='left')){
       this.directions = [1,0];
       this.direction_code='right';
     }
   }
 
   up(){
-    if (this.checkValid([0,-1])){
+    if (!(this.direction_code=='down')){
       this.directions = [0,-1];
       this.direction_code='up';
     }
   }
 
   down(){
-    if (this.checkValid([0,1])){
+    if (!(this.direction_code=='up')){
       this.directions = [0,1];
       this.direction_code='down';
     }
