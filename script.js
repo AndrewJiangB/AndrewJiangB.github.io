@@ -208,7 +208,6 @@ class Player extends Tail{
     let new_x = this.x + direction[0];
     let new_y = this.y + direction[1];
     if (new_x == this.tail.x && new_y == this.tail.y){
-      console.log("plz no");
       return false; 
     }
     return true;
