@@ -17,10 +17,6 @@ h1 {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-#snek { 
-  background-color: #7fb3ee;
-}
-
 .header_bar {
   display: flex;
   flex-direction: row;
@@ -70,4 +66,12 @@ p {
   padding: 5px;
   width: 250px;
   margin: auto;
+}
+
+#info_banner {
+  display: flex;
+  flex-direction: column;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
 }

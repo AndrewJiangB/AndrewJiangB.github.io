@@ -62,7 +62,7 @@ class Player extends Tail {
     }
     if (this.game.is_food(this.last_x, this.last_y)) {
       this.length++;
-      document.getElementById("output").textContent = "Score: " + this.length;
+      document.getElementById("score").textContent = "Score: " + this.length;
       var newtail_x = this.tail == null ? this.last_x : this.tail_last.last_x;
       var newtail_y = this.tail == null ? this.last_y : this.tail_last.last_y;
       var new_tail = new Tail(

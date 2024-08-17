@@ -22,6 +22,7 @@ function getRandomInt(max) {
       this.foodX = null;
       this.foodY = null;
       this.player = null;
+      this.game_over = false;
     }
     
     /**
@@ -82,6 +83,10 @@ function getRandomInt(max) {
       
       this.player = new Player(this.startingX, this.startingY, this)
       //this.player.add_tail(new Tail(this.player.x-1, this.player.y-1, this.player));
+    }
+
+    set_game_over(result){
+      this.game_over = result;
     }
   
     draw() {
