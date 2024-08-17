@@ -10,7 +10,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
   
-  export default class Game {
+  export default class SnakeGame {
     constructor() {
       this.width = 10;
       this.length = 10;
