@@ -88,9 +88,13 @@ export default class LifeGame {
             }
           }
         });
-        if (count > 2 && count < 5) {
+        if (count > 1 && count < 3) {
           next_row.push(new Box(l, w, this.box_list[l][w].component, "life"));
-        } else {
+        }
+        // else if ( count == 3 && this.box_list[l][w].className == "life") {
+        //     next_row.push(new Box(l, w, this.box_list[l][w].component, "life"));
+        // } 
+        else {
           next_row.push(new Box(l, w, this.box_list[l][w].component));
         }
       });
