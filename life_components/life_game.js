@@ -3,19 +3,26 @@ function getRandomInt(max) {
 }
 
 class Box {
-  constructor(x, y, component, type = "ground") {
+  constructor(x, y, component, game, type = "ground") {
     this.x = x;
     this.y = y;
     this.className = type;
     this.component = component;
+    this.game = game;
     this.component.className = this.className;
     this.component.onclick = () => {
-      if (this.className == "ground") {
+      if (this.className == "ground" && this.game.max_count > 0) {
         this.className = "life";
         this.component.className = "life";
+        this.game.max_count -= 1;
       } else if (this.className == "life") {
         this.className = "ground";
         this.component.className = "ground";
+      }
+
+      if (document.getElementById("info")) {
+        document.getElementById("info").innerText =
+          "Lyfe left: " + this.game.max_count;
       }
     };
   }
@@ -30,12 +37,18 @@ export default class LifeGame {
     this.width = 10;
     this.length = 10;
     this.box_list = [];
+    this.max_count = 10;
   }
 
   setup() {
     var div_el;
     var div_row;
     var game_field = document.getElementById("game_field");
+
+    let max_placed = document.createElement("p");
+    max_placed.innerText = "Lyfe left: " + this.max_count;
+    max_placed.id = "info";
+    document.getElementById("info_banner").appendChild(max_placed);
 
     for (var l = 0; l < this.length; l++) {
       let box_row = [];
@@ -48,7 +61,7 @@ export default class LifeGame {
         div_el.className = "ground";
 
         // Generate Container Object
-        let box = new Box(l, w, div_el);
+        let box = new Box(l, w, div_el, this);
         box_row.push(box);
 
         //Add to row node
@@ -60,6 +73,11 @@ export default class LifeGame {
   }
 
   start() {
+    if (document.getElementById("info")) {
+      document.getElementById("info").innerText =
+        "Lyfe left: " + this.max_count;
+    }
+
     let next_state = [];
     this.box_list.forEach((row, l) => {
       let next_row = [];
@@ -89,13 +107,11 @@ export default class LifeGame {
           }
         });
         if (count > 1 && count < 3) {
-          next_row.push(new Box(l, w, this.box_list[l][w].component, "life"));
-        }
-        // else if ( count == 3 && this.box_list[l][w].className == "life") {
-        //     next_row.push(new Box(l, w, this.box_list[l][w].component, "life"));
-        // } 
-        else {
-          next_row.push(new Box(l, w, this.box_list[l][w].component));
+          next_row.push(
+            new Box(l, w, this.box_list[l][w].component, this, "life")
+          );
+        } else {
+          next_row.push(new Box(l, w, this.box_list[l][w].component, this));
         }
       });
       next_state.push(next_row);
